@@ -205,69 +205,75 @@ function getMultiplyParams(
 function getCloseToDaiParams(
   marketParams: MarketParams,
   vaultInfo: VaultInfo,
-) :{
-  fromTokenAmount:BigNumber,
-  toTokenAmount:BigNumber,
-  minToTokenAmount:BigNumber,
-  borrowCollateral:BigNumber,
-  requiredDebt:BigNumber,
-  withdrawCollateral:BigNumber,
-  skipFL:boolean
-}{
-  let _skipFL = false;
-  let maxCollNeeded = vaultInfo.currentDebt.times(1.00001/* to account for not up to date value here */)
-  .dividedBy(marketParams.marketPrice.times(one.minus(marketParams.slippage))
-  .times(one.plus(marketParams.OF)))
-  .times(one.plus(marketParams.FF))
+): {
+  fromTokenAmount: BigNumber;
+  toTokenAmount: BigNumber;
+  minToTokenAmount: BigNumber;
+  borrowCollateral: BigNumber;
+  requiredDebt: BigNumber;
+  withdrawCollateral: BigNumber;
+  skipFL: boolean;
+} {
+  const _skipFL = false;
+  const maxCollNeeded = vaultInfo.currentDebt
+    .times(1.00001 /* to account for not up to date value here */)
+    .dividedBy(
+      marketParams.marketPrice
+        .times(one.minus(marketParams.slippage))
+        .times(one.plus(marketParams.OF)),
+    )
+    .times(one.plus(marketParams.FF));
 
+  const _toTokenAmount = vaultInfo.currentDebt
+    .times(one.minus(marketParams.OF))
+    .times(marketParams.marketPrice);
 
-  let _toTokenAmount = vaultInfo.currentDebt
-  .times(one.minus(marketParams.OF))
-  .times(marketParams.marketPrice);
-
-  let _requiredDebt = new BigNumber(0) ;
+  const _requiredDebt = new BigNumber(0);
 
   return {
-    fromTokenAmount:vaultInfo.currentCollateral,
-    toTokenAmount:_toTokenAmount,
-    minToTokenAmount:_toTokenAmount
-      .times(one.minus(marketParams.slippage)),
-    borrowCollateral:vaultInfo.currentCollateral,
-    requiredDebt:_requiredDebt,
-    withdrawCollateral:new BigNumber(0),
-    skipFL:_skipFL
-  }
+    fromTokenAmount: vaultInfo.currentCollateral,
+    toTokenAmount: _toTokenAmount,
+    minToTokenAmount: _toTokenAmount.times(one.minus(marketParams.slippage)),
+    borrowCollateral: vaultInfo.currentCollateral,
+    requiredDebt: _requiredDebt,
+    withdrawCollateral: new BigNumber(0),
+    skipFL: _skipFL,
+  };
 }
 
 function getCloseToCollateralParams(
   marketParams: MarketParams,
   vaultInfo: VaultInfo,
   debug = false,
-) :{
-  fromTokenAmount:BigNumber,
-  toTokenAmount:BigNumber,
-  minToTokenAmount:BigNumber,
-  borrowCollateral:BigNumber,
-  requiredDebt:BigNumber,
-  withdrawCollateral:BigNumber,
-  skipFL:boolean
-}{
-  let _requiredAmount = vaultInfo.currentDebt.times(1.00001/* to account for not up to date value here */).times(one.plus(marketParams.OF));
+): {
+  fromTokenAmount: BigNumber;
+  toTokenAmount: BigNumber;
+  minToTokenAmount: BigNumber;
+  borrowCollateral: BigNumber;
+  requiredDebt: BigNumber;
+  withdrawCollateral: BigNumber;
+  skipFL: boolean;
+} {
+  const _requiredAmount = vaultInfo.currentDebt
+    .times(1.00001 /* to account for not up to date value here */)
+    .times(one.plus(marketParams.OF));
   let _skipFL = false;
-  let maxCollNeeded = _requiredAmount.dividedBy(marketParams.marketPrice.times(one.plus(marketParams.slippage)));
+  const maxCollNeeded = _requiredAmount.dividedBy(
+    marketParams.marketPrice.times(one.plus(marketParams.slippage)),
+  );
 
-  if(vaultInfo.currentCollateral.dividedBy(vaultInfo.minCollRatio).gt(maxCollNeeded)){
+  if (vaultInfo.currentCollateral.dividedBy(vaultInfo.minCollRatio).gt(maxCollNeeded)) {
     _skipFL = true;
   }
   return {
-    fromTokenAmount:maxCollNeeded,
-    toTokenAmount:_requiredAmount.dividedBy(one.minus(marketParams.slippage)),
-    minToTokenAmount:_requiredAmount,
-    borrowCollateral:new BigNumber(0),
-    requiredDebt:_skipFL?new BigNumber(0):_requiredAmount,
-    withdrawCollateral:vaultInfo.currentCollateral.minus(maxCollNeeded),
-    skipFL:_skipFL
-  }
+    fromTokenAmount: maxCollNeeded,
+    toTokenAmount: _requiredAmount.dividedBy(one.minus(marketParams.slippage)),
+    minToTokenAmount: _requiredAmount,
+    borrowCollateral: new BigNumber(0),
+    requiredDebt: _skipFL ? new BigNumber(0) : _requiredAmount,
+    withdrawCollateral: vaultInfo.currentCollateral.minus(maxCollNeeded),
+    skipFL: _skipFL,
+  };
 }
 
 export {
