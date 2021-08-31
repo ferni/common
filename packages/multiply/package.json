@@ -30,5 +30,6 @@
     "nyc": "^15.1.0",
     "ts-mockito": "^2.6.1",
     "ts-node": "^10.2.0"
-  }
+  },
+  "gitHead": "68da63ca5ed5b6d2d96cf9f908d7f68f318dbdac"
 }

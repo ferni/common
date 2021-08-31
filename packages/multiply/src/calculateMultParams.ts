@@ -128,4 +128,25 @@ function getMultiplyParams(
   };
 }
 
-export { getMultiplyParams, DesiredCDPState, MarketParams, VaultInfo };
+function getCloseToDaiParams(
+  marketParams: MarketParams,
+  vaultInfo: VaultInfo,
+  skipFlashLoan = false,
+  debug = false,
+){
+  let collateralToExchange = vaultInfo.currentCollateral;
+  let minToAmount = vaultInfo.;
+  return {
+    debtDelta: ensureBigNumber(0),
+    collateralDelta: ensureBigNumber(collateralToExchange),
+    minToAmount: ensureBigNumber(0),
+    oazoFee: ensureBigNumber(0),
+    loanFee: ensureBigNumber(0),
+  };
+}
+
+function getCloseToCollateralParams(){
+
+}
+
+export { getMultiplyParams, getCloseToDaiParams, getCloseToCollateralParams,DesiredCDPState, MarketParams, VaultInfo };
