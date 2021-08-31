@@ -19,4 +19,7 @@ function ensureBigNumber(candidate: ConvertableToBigNumber): BigNumber {
   return retVal;
 }
 
-export { ensureBigNumber };
+const one = new BigNumber(1);
+const ten = new BigNumber(10);
+
+export { ensureBigNumber, one, ten };

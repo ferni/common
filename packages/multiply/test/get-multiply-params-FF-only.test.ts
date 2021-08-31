@@ -17,13 +17,13 @@ describe('getMultiplyParams no oazo fee, slippage, zero price divergence, FF app
       OF: 0,
       slippage: 0,
     });
-    vaultInfo = new VaultInfo(10000, 10);
+    vaultInfo = new VaultInfo(10000, 10, 1.5);
   });
 
   describe(`multiply increase inital debt=10000 collRatio 3`, async () => {
-    it('should pay FF of 2500 when changing collRatio from 3 to 2', async () => {
-      const desiredCdpState = new DesiredCDPState(new BigNumber(2), 0, 0, 0, 0);
-      const retVal = getMultiplyParams(marketParams, vaultInfo, desiredCdpState, false, false);
+    it('should pay FF of 6000 when changing collRatio from 3 to 1.5', async () => {
+      const desiredCdpState = new DesiredCDPState(new BigNumber(1.5), 0, 0, 0, 0);
+      const retVal = getMultiplyParams(marketParams, vaultInfo, desiredCdpState, false);
       const finalDebt = retVal.debtDelta
         .plus(vaultInfo.currentDebt)
         .plus(retVal.oazoFee)
@@ -31,16 +31,29 @@ describe('getMultiplyParams no oazo fee, slippage, zero price divergence, FF app
       const finalCollVal = retVal.collateralDelta
         .plus(vaultInfo.currentCollateral)
         .times(marketParams.oraclePrice);
-      console.log('coll and debt USD value', finalCollVal.toFixed(5), finalDebt.toFixed(5));
       expect(retVal.oazoFee.toNumber()).to.be.equal(0);
-      expect(retVal.loanFee.toNumber()).to.be.equal(2500);
+      expect(retVal.loanFee.toNumber()).to.be.equal(6000);
+    });
+
+    it('should pay FF of 0 when changing collRatio from 3 to 2.5', async () => {
+      const desiredCdpState = new DesiredCDPState(new BigNumber(2.5), 0, 0, 0, 0);
+      const retVal = getMultiplyParams(marketParams, vaultInfo, desiredCdpState, false);
+      const finalDebt = retVal.debtDelta
+        .plus(vaultInfo.currentDebt)
+        .plus(retVal.oazoFee)
+        .plus(retVal.loanFee);
+      const finalCollVal = retVal.collateralDelta
+        .plus(vaultInfo.currentCollateral)
+        .times(marketParams.oraclePrice);
+      expect(retVal.oazoFee.toNumber()).to.be.equal(0);
+      expect(retVal.loanFee.toNumber()).to.be.equal(0);
     });
   });
 
   describe(`multiply decrease inital debt=10000 collRatio 3`, async () => {
     it('should have FF equal to 2500 when changing collateralisation ratio to 4', async () => {
       const desiredCdpState = new DesiredCDPState(5, 0, 0, 0, 0);
-      const retVal = getMultiplyParams(marketParams, vaultInfo, desiredCdpState, false, false);
+      const retVal = getMultiplyParams(marketParams, vaultInfo, desiredCdpState, false);
       const finalDebt = retVal.debtDelta.plus(vaultInfo.currentDebt);
       const finalCollVal = retVal.collateralDelta
         .plus(vaultInfo.currentCollateral)

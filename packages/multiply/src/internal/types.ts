@@ -29,9 +29,15 @@ class MarketParams {
 class VaultInfo {
   public currentDebt: BigNumber;
   public currentCollateral: BigNumber;
-  constructor(_debt: ConvertableToBigNumber, _coll: ConvertableToBigNumber) {
+  public minCollRatio: BigNumber; //minimum acceptable collateralisation ratio
+  constructor(
+    _debt: ConvertableToBigNumber,
+    _coll: ConvertableToBigNumber,
+    _minCollRatio: ConvertableToBigNumber,
+  ) {
     this.currentDebt = ensureBigNumber(_debt);
     this.currentCollateral = ensureBigNumber(_coll);
+    this.minCollRatio = ensureBigNumber(_minCollRatio);
   }
 }
 class DesiredCDPState {
