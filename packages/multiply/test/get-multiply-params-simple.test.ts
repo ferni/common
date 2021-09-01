@@ -18,7 +18,7 @@ describe('getMultiplyParams no fees, slippage, zero price divergence/', async ()
       OF: 0,
       slippage: 0,
     });
-    vaultInfo = new VaultInfo(10000, 10);
+    vaultInfo = new VaultInfo(10000, 10, 1.5);
   });
 
   it('should be exported from package', async () => {
@@ -34,7 +34,7 @@ describe('getMultiplyParams no fees, slippage, zero price divergence/', async ()
         OF: 0,
         slippage: 0,
       }),
-      new VaultInfo(100, 100),
+      new VaultInfo(100, 100, 1.5),
       new DesiredCDPState(2, 0, 0, 0, 0),
     );
     expect(val).to.not.be.undefined;
@@ -54,9 +54,8 @@ describe('getMultiplyParams no fees, slippage, zero price divergence/', async ()
         OF: 0,
         slippage: 0,
       }),
-      new VaultInfo(100, 100),
+      new VaultInfo(100, 100, 1.5),
       new DesiredCDPState(2, 0, 0, 0, 0),
-      true,
       true,
     );
     console.log = backup;
@@ -78,9 +77,8 @@ describe('getMultiplyParams no fees, slippage, zero price divergence/', async ()
         OF: 0,
         slippage: 0,
       }),
-      new VaultInfo(10000, 100),
+      new VaultInfo(10000, 100, 1.5),
       new DesiredCDPState(7, 0, 0, 0, 0),
-      true,
       true,
     );
     console.log = backup;
