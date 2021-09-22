@@ -1,6 +1,6 @@
 {
   "name": "@oasisdex/web3-context",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "description": "Web3 Context",
   "homepage": "https://github.com/OasisDEX/common#readme",
   "main": "lib/src/index.js",
