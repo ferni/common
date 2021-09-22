@@ -1,6 +1,6 @@
 {
   "name": "@oasisdex/multiply",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Functions calculating multiply parameters",
   "homepage": "https://github.com/OasisDEX/common#readme",
   "main": "lib/src/index.js",
