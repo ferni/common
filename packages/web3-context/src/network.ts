@@ -3,6 +3,7 @@ import Web3 from 'web3';
 
 export const networkNameToId = {
   main: 1,
+  goerli: 5,
   kovan: 42,
   hardhat: 2137,
 } as { [key: string]: number };
