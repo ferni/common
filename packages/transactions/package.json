@@ -24,7 +24,7 @@
     "ramda": "^0.25.0",
     "rxjs": "^6.2.0",
     "rxjs-take-while-inclusive": "^2.1.0",
-    "web3": "^1.3.3"
+    "web3": "1.5.3"
   },
   "gitHead": "0423d3d02ebfc45bf73092227a118bf9409f4696"
 }
