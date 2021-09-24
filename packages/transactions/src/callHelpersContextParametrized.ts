@@ -146,8 +146,8 @@ export function createSendWithGasConstraints1559<A extends TxMeta, CC extends Co
             options: (args1: B) => ({
               ...(callData.options ? callData.options(args1) : {}),
               gas,
-              maxPriorityFeePerGas:gasPrice,
-              maxFeePerGas:gasPrice
+              maxPriorityFeePerGas: gasPrice,
+              maxFeePerGas: gasPrice,
             }),
           },
           args,
