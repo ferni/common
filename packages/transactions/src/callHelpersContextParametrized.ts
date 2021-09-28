@@ -5,7 +5,12 @@ import Web3 from 'web3';
 
 import { SendFunction, TxMeta, TxState } from './types';
 
+type GasPriceParams = {
+  MaxFeePerGas: BigNumber
+  MaxPrirityFeePerGas: BigNumber
+}
 type GasPrice$ = Observable<BigNumber>;
+type GasPrice1559$ = Observable<GasPriceParams>;
 export const DEFAULT_GAS = 6000000;
 
 export type Context = { status: string; web3: Web3; id: string };
@@ -134,7 +139,7 @@ export function createSendWithGasConstraints<A extends TxMeta, CC extends Contex
 export function createSendWithGasConstraints1559<A extends TxMeta, CC extends ContextConnected>(
   send: SendFunction<A>,
   context: CC,
-  gasPrice$: GasPrice$,
+  gasPrice$: GasPrice1559$,
 ) {
   return <B extends A>(callData: TransactionDef<B, CC>, args: B): Observable<TxState<B>> => {
     return combineLatest(estimateGas(context, callData, args), gasPrice$).pipe(
@@ -146,8 +151,8 @@ export function createSendWithGasConstraints1559<A extends TxMeta, CC extends Co
             options: (args1: B) => ({
               ...(callData.options ? callData.options(args1) : {}),
               gas,
-              maxPriorityFeePerGas: gasPrice,
-              maxFeePerGas: gasPrice,
+              maxPriorityFeePerGas: gasPrice.MaxPrirityFeePerGas,
+              maxFeePerGas: gasPrice.MaxFeePerGas,
             }),
           },
           args,
