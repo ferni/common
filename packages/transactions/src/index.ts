@@ -7,6 +7,7 @@ export type {
 export {
   createSendTransaction,
   createSendWithGasConstraints,
+  createSendWithGasConstraints1559,
   estimateGas,
   call,
 } from './callHelpersContextParametrized';
