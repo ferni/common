@@ -6,9 +6,9 @@ import Web3 from 'web3';
 import { SendFunction, TxMeta, TxState } from './types';
 
 type GasPriceParams = {
-  MaxFeePerGas: BigNumber
-  MaxPrirityFeePerGas: BigNumber
-}
+  MaxFeePerGas: BigNumber;
+  MaxPrirityFeePerGas: BigNumber;
+};
 type GasPrice$ = Observable<BigNumber>;
 type GasPrice1559$ = Observable<GasPriceParams>;
 export const DEFAULT_GAS = 6000000;
