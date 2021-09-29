@@ -7,7 +7,7 @@ import { SendFunction, TxMeta, TxState } from './types';
 
 type GasPriceParams = {
   maxFeePerGas: BigNumber;
-  maxPrirityFeePerGas: BigNumber;
+  maxPriorityFeePerGas: BigNumber;
 };
 type GasPrice$ = Observable<BigNumber>;
 type GasPrice1559$ = Observable<GasPriceParams>;
@@ -151,7 +151,7 @@ export function createSendWithGasConstraints1559<A extends TxMeta, CC extends Co
             options: (args1: B) => ({
               ...(callData.options ? callData.options(args1) : {}),
               gas,
-              maxPriorityFeePerGas: gasPrice.maxPrirityFeePerGas,
+              maxPriorityFeePerGas: gasPrice.maxPriorityFeePerGas,
               maxFeePerGas: gasPrice.maxFeePerGas,
             }),
           },
