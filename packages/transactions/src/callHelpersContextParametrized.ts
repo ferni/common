@@ -47,7 +47,7 @@ export function call<D, R, CC extends ContextConnected>(
   };
 }
 
-// we accommodate for the fact that blockchain state
+// we accommodate for the fact that blockchain state,
 // can be different when tx execute and it can take more gas
 const GAS_ESTIMATION_MULTIPLIER = 1.5;
 export function estimateGas<A extends TxMeta, CC extends ContextConnected>(
