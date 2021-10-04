@@ -145,7 +145,6 @@ export function createSendWithGasConstraints1559<A extends TxMeta, CC extends Co
     return combineLatest(estimateGas(context, callData, args), gasPrice$).pipe(
       first(),
       switchMap(([gas, gasPrice]) => {
-        console.log("Inside sending transaction createSendWithGasConstraints1559");
         return createSendTransaction(send, context)(
           {
             ...callData,
