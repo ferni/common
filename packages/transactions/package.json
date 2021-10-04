@@ -1,6 +1,6 @@
 {
   "name": "@oasisdex/transactions",
-  "version": "0.0.26-alpha.0",
+  "version": "0.0.33-alpha.0",
   "description": "Utilities for sending and monitoring transactions",
   "homepage": "https://github.com/OasisDEX/common#readme",
   "main": "lib/src/index.js",
