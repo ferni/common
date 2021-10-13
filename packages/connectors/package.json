@@ -1,6 +1,6 @@
 {
   "name": "@oasisdex/connectors",
-  "version": "0.0.25-alpha.0",
+  "version": "0.1.0",
   "description": "Web3-react connectors for Ledger, trezor and magic link",
   "homepage": "https://github.com/OasisDEX/common#readme",
   "main": "lib/src/index.js",
