@@ -1,1 +1,8 @@
-export { getMultiplyParams, DesiredCDPState, MarketParams, VaultInfo } from './calculateMultParams';
+export {
+  getMultiplyParams,
+  getCloseToDaiParams,
+  getCloseToCollateralParams,
+  DesiredCDPState,
+  MarketParams,
+  VaultInfo,
+} from './calculateMultParams';
